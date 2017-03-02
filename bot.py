@@ -56,5 +56,4 @@ for submission in subreddit.new(limit=100):
         totalAddition += newWikiLine
 afterLastProposalIndex = lastProposalIndex + len(lastProposalLine)
 totalNewPage = wikiStr[:afterLastProposalIndex] + "\n" + totalAddition + wikiStr[afterLastProposalIndex:]
-testWiki = praw.models.WikiPage(reddit, reddit.subreddit("arn3ntestsubreddit"), "index")
-testWiki.edit(totalNewPage)
+wiki.edit(totalNewPage);
