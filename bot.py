@@ -1,8 +1,7 @@
 import praw;
 
-reddit = praw.Reddit(client_id='Qgx6rHj1TzxtoQ', client_secret="1V1hyJeoOJNXaOff0_dI1_Zh8rE",
-                     password='democracyftw', user_agent='website:com.fakesite.democracybot:v0.0.1 (by u/DemocracyArchiveBot)',
-                     username='DemocracyArchiveBot')
+reddit = praw.Reddit('bot1',  user_agent='website:com.fakesite.democracybot:v0.0.1 (by u/DemocracyArchiveBot)'  )
+print(reddit.user.me())
 subreddit = reddit.subreddit('democracysimulator')
 wiki = praw.models.WikiPage(reddit, subreddit, "archive")
 wikiStr = wiki.content_md;
@@ -46,14 +45,15 @@ for submission in subreddit.new(limit=100):
         if nVotes > yVotes: #Denied
             descriptionStr = "Denied with a " + str(nVotes) + " to " + str(yVotes) + " vote."
         elif nVotes < yVotes: #Approved
-            descriptionStr = "Approved with a " + str(yVotes) + " to " + (nVotes) + " vote."
+            descriptionStr = "Approved with a " + str(yVotes) + " to " + str(nVotes) + " vote."
         else:
             descriptionStr = "Inconclusive proposal with " + str(nVotes) + " votes for \"no\" and " + str(yVotes) + " votes for \"yes\"."
         linkStr = "[\"" + submission.title + "\"](" + submission.url + ")"
         author = submission.author
         authorStr = " by " + "[\"/u/" + author.name + "\"](https://www.reddit.com/u/" + author.name + ")"
-        newWikiLine = str(proposalCount) + ". " + linkStr + authorStr + ". *" + descriptionStr + "*\n"
+        newWikiLine = str(proposalCount) + ". " + linkStr + authorStr + ". *" + descriptionStr + "*  \n "
         totalAddition += newWikiLine
 afterLastProposalIndex = lastProposalIndex + len(lastProposalLine)
 totalNewPage = wikiStr[:afterLastProposalIndex] + "\n" + totalAddition + wikiStr[afterLastProposalIndex:]
-wiki.edit(totalNewPage);
+testWiki = praw.models.WikiPage(reddit, reddit.subreddit('arn3ntestsubreddit'), "index")
+testWiki.edit(totalNewPage);
